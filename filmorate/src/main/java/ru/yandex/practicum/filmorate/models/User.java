@@ -1,15 +1,36 @@
 package ru.yandex.practicum.filmorate.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
-@Data
+@Getter
+@Setter
+@ToString
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@AllArgsConstructor
+@NoArgsConstructor
 public class User {
-    private Integer id;
-    private String email;
-    private String login;
-    private String name;
-    private LocalDateTime birthday;
 
+   transient  private Integer id;
+    @EqualsAndHashCode.Include
+
+    private String login;
+    @EqualsAndHashCode.Include
+
+    private String name;
+    @EqualsAndHashCode.Include
+
+    private String email;
+    @EqualsAndHashCode.Include
+
+    private LocalDate birthday;
+
+ public User(User user) {
+  this.email = user.email;
+  this.birthday =user.birthday;
+  this.login = user.login;
+  this.name = name;
+   }
 }
