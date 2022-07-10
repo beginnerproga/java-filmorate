@@ -51,7 +51,7 @@ public class FilmController {
     }
     public void validate(Film film) throws ValidationException {
         if (film.getName()==null ||film.getName().isEmpty()){
-            log.error("У фильма, который вы хотите добавить, отсутствует название.");
+            log.error("У фильмаv, который вы хотите добавить, отсутствует название.");
             throw new ValidationException("У фильма, который вы хотите добавить, отсутствует название.");
         }
         if (film.getDescription().length()>200){
