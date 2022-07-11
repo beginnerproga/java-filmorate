@@ -5,10 +5,10 @@ import com.google.gson.GsonBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
-import ru.yandex.practicum.filmorate.adapter.LocalDateAdapter;
 import ru.yandex.practicum.filmorate.exception.ValidationException;
 import ru.yandex.practicum.filmorate.models.User;
 
+import javax.validation.Valid;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,13 +16,12 @@ import java.util.List;
 @RestController
 public class UserController {
 
-    private final Gson gson = new GsonBuilder().registerTypeAdapter(LocalDate.class,new LocalDateAdapter()).create();
     private final List<User> users = new ArrayList<>();
-    private static final Logger log = LoggerFactory.getLogger(UserController.class);
+    private  final Logger log = LoggerFactory.getLogger(UserController.class);
     Integer counter = 1;
 
     @PostMapping("/users")
-    public User addUser(@RequestBody User user) throws ValidationException {
+    public User addUser(@Valid  @RequestBody  User user) throws ValidationException {
         validate(user);
         for (User x: users)
             if (x.equals(user)){
@@ -41,7 +40,7 @@ public class UserController {
     }
 
     @PutMapping("/users")
-    public User updateUser(@RequestBody User user) throws  ValidationException {
+    public User updateUser(@Valid @RequestBody User user) throws  ValidationException {
         validate(user);
         if (user.getId()==null || user.getId()>counter ||user.getId()<0){
             throw new ValidationException("У фильма, который вы хотите обновить, проблемы с id");

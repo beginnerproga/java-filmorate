@@ -3,6 +3,9 @@ package ru.yandex.practicum.filmorate.models;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Positive;
+import javax.validation.constraints.Size;
 import java.time.LocalDate;
 @Getter
 @Setter
@@ -12,19 +15,15 @@ import java.time.LocalDate;
 @NoArgsConstructor
 
 public class Film {
-    transient private Integer id;
+     private Integer id;
     @EqualsAndHashCode.Include
+    @NotNull
     private String name;
     @EqualsAndHashCode.Include
     private String description;
     @EqualsAndHashCode.Include
     private LocalDate releaseDate;
     @EqualsAndHashCode.Include
+    @Positive
     private int duration;
-    public Film(Film film){
-        this.name = film.name;
-        this.description = film.description;
-        this.releaseDate = film.releaseDate;
-        this.duration = film.duration;
-    }
 }
