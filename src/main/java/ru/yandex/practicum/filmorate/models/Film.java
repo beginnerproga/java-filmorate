@@ -7,6 +7,9 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 import javax.validation.constraints.Size;
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
+
 @Getter
 @Setter
 @ToString
@@ -15,7 +18,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 
 public class Film {
-     private Integer id;
+    private Integer id;
     @EqualsAndHashCode.Include
     @NotNull
     private String name;
@@ -26,4 +29,11 @@ public class Film {
     @EqualsAndHashCode.Include
     @Positive
     private int duration;
+
+    public Set<Integer> getUsersId() {
+        return usersId;
+    }
+
+    @JsonIgnore
+    Set<Integer> usersId = new HashSet<>();
 }

@@ -6,6 +6,8 @@ import lombok.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -20,7 +22,6 @@ public class User {
     @NotNull
     private String login;
     @EqualsAndHashCode.Include
-
     private String name;
     @EqualsAndHashCode.Include
     @NotNull
@@ -28,5 +29,7 @@ public class User {
     private String email;
     @EqualsAndHashCode.Include
     private LocalDate birthday;
+    @JsonIgnore
+    Set<Integer> friendsId = new HashSet<>();
 
 }
