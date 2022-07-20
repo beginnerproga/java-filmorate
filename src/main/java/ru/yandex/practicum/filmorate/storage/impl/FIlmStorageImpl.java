@@ -1,13 +1,15 @@
-package ru.yandex.practicum.filmorate.storage;
+package ru.yandex.practicum.filmorate.storage.impl;
 
 import org.springframework.stereotype.Component;
 import ru.yandex.practicum.filmorate.models.Film;
 import ru.yandex.practicum.filmorate.models.User;
+import ru.yandex.practicum.filmorate.storage.FilmStorage;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Component
-public class InMemoryFilmStorage implements FilmStorage {
+public class FIlmStorageImpl implements FilmStorage {
     private final HashMap<Integer, Film> films = new HashMap<>();
     private Integer counter = 0;
 
@@ -29,7 +31,7 @@ public class InMemoryFilmStorage implements FilmStorage {
 
     @Override
     public void addLike(Film film, User user) {
-        film.getUsersId().add(user.getId());
+        films.get(film.getId()).getUsersId().add(user.getId());
     }
 
     @Override
@@ -38,19 +40,14 @@ public class InMemoryFilmStorage implements FilmStorage {
     }
 
     @Override
-    public ArrayList<Film> getMostLikeMovies(int count) {
-        ArrayList<Film> listFilms = new ArrayList<>(films.values());
-        Collections.sort(listFilms, new Comparator<Film>() {
-            @Override
-            public int compare(Film film1, Film film2) {
-                return film1.getUsersId().size() > film2.getUsersId().size() ? -1 : film1.getUsersId().size() < film2.getUsersId().size() ? 1 : 0;
-            }
-        });
+    public List<Film> getMostLikeMovies(int count) {
+        List<Film> listFilms =  films.values()
+                .stream()
+                .sorted(Comparator.comparingInt(film0 -> film0.getUsersId().size()))
+                .collect(Collectors.toList());
+        Collections.reverse(listFilms);
         if (count >= listFilms.size())
-            return listFilms;
-        System.out.println(listFilms + "!!!!!!!!!!!!!");
-        for (Film film : listFilms)
-            System.out.println(film.getUsersId() + "!!!!!!!!!1");
+           return listFilms;
         listFilms.subList(count, listFilms.size()).clear();
         return listFilms;
     }

@@ -5,6 +5,7 @@ import ru.yandex.practicum.filmorate.models.User;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public interface FilmStorage {
     public Film update(Film film);
@@ -19,6 +20,6 @@ public interface FilmStorage {
 
     void deleteLike(Film film, User user);
 
-    ArrayList<Film> getMostLikeMovies(int count);
+    List<Film> getMostLikeMovies(int count);
 
 }
