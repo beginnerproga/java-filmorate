@@ -17,7 +17,7 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 
-public class Film {
+public class Film  implements Comparable<Film>{
     private Integer id;
     @EqualsAndHashCode.Include
     @NotNull
@@ -36,4 +36,9 @@ public class Film {
 
     @JsonIgnore
     Set<Integer> usersId = new HashSet<>();
+
+    public int compareTo(Film p){
+        return this.usersId.size() - p.usersId.size();
+
+    }
 }

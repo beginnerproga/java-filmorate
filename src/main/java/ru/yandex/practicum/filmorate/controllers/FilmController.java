@@ -22,13 +22,6 @@ public class FilmController {
     private final FilmService filmService;
     private final Validator validator;
     private static final Logger log = LoggerFactory.getLogger(FilmController.class);
-
-    @Autowired
-    public FilmController(Validator validator, FilmServiceImpl filmService) {
-        this.filmService = filmService;
-        this.validator = validator;
-    }
-
     @PostMapping()
     public Film addFilm(@Valid @RequestBody Film film) throws ValidationException {
         validator.validateInFilmController(film);
@@ -73,7 +66,7 @@ public class FilmController {
     public List<Film> getMostLikesMovies(@RequestParam(required = false, defaultValue = "10") int count) {
         if (count <= 0)
             count = 10;
-        return filmService.getMostLikesMovies(count);
+      return filmService.getMostLikesMovies(count);
 
     }
 

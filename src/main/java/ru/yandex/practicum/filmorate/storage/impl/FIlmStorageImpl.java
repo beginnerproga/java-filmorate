@@ -43,12 +43,8 @@ public class FIlmStorageImpl implements FilmStorage {
     public List<Film> getMostLikeMovies(int count) {
         List<Film> listFilms =  films.values()
                 .stream()
-                .sorted(Comparator.comparingInt(film0 -> film0.getUsersId().size()))
+                .sorted(Comparator.comparingInt(film0 -> film0.getUsersId().size())).sorted(Collections.reverseOrder()).limit(count)
                 .collect(Collectors.toList());
-        Collections.reverse(listFilms);
-        if (count >= listFilms.size())
-           return listFilms;
-        listFilms.subList(count, listFilms.size()).clear();
         return listFilms;
     }
 
