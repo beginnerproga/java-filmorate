@@ -9,7 +9,6 @@ import javax.validation.constraints.Size;
 import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
-
 @Getter
 @Setter
 @ToString
@@ -18,6 +17,7 @@ import java.util.Set;
 @NoArgsConstructor
 
 public class Film  implements Comparable<Film>{
+
     private Integer id;
     @EqualsAndHashCode.Include
     @NotNull
@@ -29,6 +29,11 @@ public class Film  implements Comparable<Film>{
     @EqualsAndHashCode.Include
     @Positive
     private int duration;
+    @EqualsAndHashCode.Include
+    private Genre genre;
+    @EqualsAndHashCode.Include
+    private MPA mpa;
+
 
     public Set<Integer> getUsersId() {
         return usersId;

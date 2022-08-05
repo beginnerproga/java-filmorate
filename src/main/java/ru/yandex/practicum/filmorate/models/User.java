@@ -1,8 +1,6 @@
 package ru.yandex.practicum.filmorate.models;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
-
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
@@ -31,5 +29,7 @@ public class User {
     private LocalDate birthday;
     @JsonIgnore
     Set<Integer> friendsId = new HashSet<>();
+    @EqualsAndHashCode.Include
+    private StatusFriendship statusFriendship;
 
 }
