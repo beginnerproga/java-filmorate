@@ -11,6 +11,7 @@ import ru.yandex.practicum.filmorate.validation.Validator;
 
 import javax.validation.Valid;
 import java.util.ArrayList;
+import java.util.List;
 
 
 @RestController
@@ -62,12 +63,12 @@ public class UserController {
     }
 
     @GetMapping("/{id}/friends")
-    public ArrayList<User> getUserFriends(@PathVariable int id) {
+    public List<User> getUserFriends(@PathVariable int id) {
         return userService.getUserFriends(id);
     }
 
     @GetMapping("/{id}/friends/common/{otherId}")
-    public ArrayList<User> getMutualFriends(@PathVariable int id, @PathVariable int otherId) {
+    public List<User> getMutualFriends(@PathVariable int id, @PathVariable int otherId) {
         return userService.getMutualFriends(id, otherId);
     }
 }

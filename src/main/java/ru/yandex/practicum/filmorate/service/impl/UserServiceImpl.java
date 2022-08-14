@@ -1,18 +1,25 @@
 package ru.yandex.practicum.filmorate.service.impl;
 
-import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import ru.yandex.practicum.filmorate.exception.ErrorIdException;
 import ru.yandex.practicum.filmorate.exception.NotFoundException;
 import ru.yandex.practicum.filmorate.models.User;
 import ru.yandex.practicum.filmorate.service.UserService;
 import ru.yandex.practicum.filmorate.storage.UserStorage;
+
 import java.util.ArrayList;
+import java.util.List;
 
 @Service
-@RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
     private final UserStorage userStorage;
+
+    @Autowired
+    public UserServiceImpl(@Qualifier("userDbStorage") UserStorage userStorage) {
+        this.userStorage = userStorage;
+    }
 
     @Override
     public User get(int userId) {
@@ -30,7 +37,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public ArrayList<User> getUsers() {
-        return new ArrayList<User>(userStorage.getUsers().values());
+        return new ArrayList<>(userStorage.getUsers().values());
     }
 
     @Override
@@ -71,17 +78,17 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public ArrayList<User> getUserFriends(int id) {
+    public List<User> getUserFriends(int id) {
         User user = userStorage.get(id);
         if (user == null) {
             throw new NotFoundException("User с id = " + id + " не найден.");
         }
-        return userStorage.getUserFriends(user);
+        return userStorage.getUserFriends(id);
 
     }
 
     @Override
-    public ArrayList<User> getMutualFriends(int id, int otherId) {
+    public List<User> getMutualFriends(int id, int otherId) {
         User user = userStorage.get(id);
         User otherUser = userStorage.get(otherId);
         if (user == null) {

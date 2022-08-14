@@ -2,22 +2,19 @@ package ru.yandex.practicum.filmorate.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
-
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
-import javax.validation.constraints.Size;
 import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
+
 @Getter
 @Setter
 @ToString
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-@AllArgsConstructor
 @NoArgsConstructor
 
-public class Film  implements Comparable<Film>{
-
+public class Film implements Comparable<Film> {
     private Integer id;
     @EqualsAndHashCode.Include
     @NotNull
@@ -30,19 +27,45 @@ public class Film  implements Comparable<Film>{
     @Positive
     private int duration;
     @EqualsAndHashCode.Include
-    private Genre genre;
+    private Set<Genre> genres = new HashSet<>();
+    @NotNull
     @EqualsAndHashCode.Include
-    private MPA mpa;
-
-
-    public Set<Integer> getUsersId() {
-        return usersId;
-    }
-
+    private Mpa mpa;
+    @NotNull
+    @EqualsAndHashCode.Include
+    private int rate;
     @JsonIgnore
     Set<Integer> usersId = new HashSet<>();
 
-    public int compareTo(Film p){
+    public Film(Integer id, String name, String description, LocalDate releaseDate, int duration, Set<Genre> genres, Mpa mpa, int rate) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.releaseDate = releaseDate;
+        this.duration = duration;
+        this.genres = genres;
+        this.mpa = mpa;
+        this.rate = rate;
+    }
+    public Film( String name, String description, LocalDate releaseDate, int duration, Set<Genre> genres, Mpa mpa, int rate) {
+        this.name = name;
+        this.description = description;
+        this.releaseDate = releaseDate;
+        this.duration = duration;
+        this.genres = genres;
+        this.mpa = mpa;
+        this.rate = rate;
+    }
+    public Film(Integer id, String name, String description, LocalDate releaseDate, int duration, Mpa mpa, int rate) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.releaseDate = releaseDate;
+        this.duration = duration;
+        this.mpa = mpa;
+        this.rate = rate;
+    }
+    public int compareTo(Film p) {
         return this.usersId.size() - p.usersId.size();
 
     }

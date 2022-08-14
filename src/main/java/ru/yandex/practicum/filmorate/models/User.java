@@ -17,7 +17,6 @@ public class User {
 
     private Integer id;
     @EqualsAndHashCode.Include
-    @NotNull
     private String login;
     @EqualsAndHashCode.Include
     private String name;
@@ -27,9 +26,23 @@ public class User {
     private String email;
     @EqualsAndHashCode.Include
     private LocalDate birthday;
+
     @JsonIgnore
     Set<Integer> friendsId = new HashSet<>();
-    @EqualsAndHashCode.Include
-    private StatusFriendship statusFriendship;
 
+    public User(Integer id, String login, String name, String email, LocalDate birthday) {
+        this.id = id;
+        this.login = login;
+        this.name = name;
+        this.email = email;
+        this.birthday = birthday;
+
+    }
+    public User( String login, String name, String email, LocalDate birthday) {
+        this.login = login;
+        this.name = name;
+        this.email = email;
+        this.birthday = birthday;
+
+    }
 }

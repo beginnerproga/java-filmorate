@@ -3,14 +3,11 @@ package ru.yandex.practicum.filmorate.controllers;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import ru.yandex.practicum.filmorate.exception.ValidationException;
 import ru.yandex.practicum.filmorate.models.Film;
 import ru.yandex.practicum.filmorate.service.FilmService;
-import ru.yandex.practicum.filmorate.service.impl.FilmServiceImpl;
 import ru.yandex.practicum.filmorate.validation.Validator;
-
 import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,6 +19,7 @@ public class FilmController {
     private final FilmService filmService;
     private final Validator validator;
     private static final Logger log = LoggerFactory.getLogger(FilmController.class);
+
     @PostMapping()
     public Film addFilm(@Valid @RequestBody Film film) throws ValidationException {
         validator.validateInFilmController(film);
@@ -31,7 +29,7 @@ public class FilmController {
             }
         }
         log.info("добавили в HashSet Films экземпляром: " + film);
-        return  filmService.save(film);
+        return filmService.save(film);
     }
 
     @GetMapping()
@@ -66,7 +64,7 @@ public class FilmController {
     public List<Film> getMostLikesMovies(@RequestParam(required = false, defaultValue = "10") int count) {
         if (count <= 0)
             count = 10;
-      return filmService.getMostLikesMovies(count);
+        return filmService.getMostLikesMovies(count);
 
     }
 

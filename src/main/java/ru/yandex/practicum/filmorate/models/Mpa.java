@@ -10,13 +10,12 @@ import javax.validation.constraints.NotNull;
 @NoArgsConstructor
 @ToString
 @EqualsAndHashCode(of="id")
-public class Genre
-{
+public class Mpa {
     @NotNull
     private int id;
     private String name;
 
-    public Genre(int id) {
+    public Mpa(int id) {
         this.id = id;
     }
 }
