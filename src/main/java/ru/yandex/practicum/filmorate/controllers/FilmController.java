@@ -1,8 +1,7 @@
 package ru.yandex.practicum.filmorate.controllers;
 
 import lombok.RequiredArgsConstructor;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 import ru.yandex.practicum.filmorate.exception.ValidationException;
 import ru.yandex.practicum.filmorate.models.Film;
@@ -15,10 +14,10 @@ import java.util.List;
 @RestController
 @RequestMapping("/films")
 @RequiredArgsConstructor
+@Slf4j
 public class FilmController {
     private final FilmService filmService;
     private final Validator validator;
-    private static final Logger log = LoggerFactory.getLogger(FilmController.class);
 
     @PostMapping()
     public Film addFilm(@Valid @RequestBody Film film) throws ValidationException {

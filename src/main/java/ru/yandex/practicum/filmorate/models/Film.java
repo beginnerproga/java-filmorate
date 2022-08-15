@@ -35,7 +35,7 @@ public class Film implements Comparable<Film> {
     @EqualsAndHashCode.Include
     private int rate;
     @JsonIgnore
-    Set<Integer> usersId = new HashSet<>();
+    private Set<Integer> usersId = new HashSet<>();
 
     public Film(Integer id, String name, String description, LocalDate releaseDate, int duration, Set<Genre> genres, Mpa mpa, int rate) {
         this.id = id;

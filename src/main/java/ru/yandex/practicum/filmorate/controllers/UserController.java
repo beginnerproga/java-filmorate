@@ -1,8 +1,7 @@
 package ru.yandex.practicum.filmorate.controllers;
 
 import lombok.RequiredArgsConstructor;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 import ru.yandex.practicum.filmorate.exception.ValidationException;
 import ru.yandex.practicum.filmorate.models.User;
@@ -17,17 +16,16 @@ import java.util.List;
 @RestController
 @RequestMapping("/users")
 @RequiredArgsConstructor
+@Slf4j
 public class UserController {
     private final UserService userService;
     private final Validator validator;
-
-    private final Logger log = LoggerFactory.getLogger(UserController.class);
 
     @PostMapping()
     public User addUser(@Valid @RequestBody User user) throws ValidationException {
         validator.validateInUserController(user);
         for (User x : userService.getUsers())
-            if (x.equals(user)) {
+            if (x.getEmail().equals(user.getEmail())) {
                 throw new ValidationException("Такой пользователь уже добавлен.");
             }
         log.info("добавили в HashSet Users экземпляром: " + user);
