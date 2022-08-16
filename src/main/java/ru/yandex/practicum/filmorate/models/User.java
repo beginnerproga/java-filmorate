@@ -28,7 +28,7 @@ public class User {
     private LocalDate birthday;
 
     @JsonIgnore
-    Set<Integer> friendsId = new HashSet<>();
+    private Set<Integer> friendsId = new HashSet<>();
 
     public User(Integer id, String login, String name, String email, LocalDate birthday) {
         this.id = id;

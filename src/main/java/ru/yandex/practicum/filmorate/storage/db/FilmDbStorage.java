@@ -1,4 +1,6 @@
 package ru.yandex.practicum.filmorate.storage.db;
+
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
@@ -8,6 +10,7 @@ import ru.yandex.practicum.filmorate.models.Film;
 import ru.yandex.practicum.filmorate.models.Mpa;
 import ru.yandex.practicum.filmorate.models.User;
 import ru.yandex.practicum.filmorate.storage.FilmStorage;
+
 import java.sql.*;
 import java.time.LocalDate;
 import java.util.HashMap;
@@ -15,12 +18,9 @@ import java.util.List;
 import java.util.Objects;
 
 @Repository
+@RequiredArgsConstructor
 public class FilmDbStorage implements FilmStorage {
     private final JdbcTemplate jdbcTemplate;
-    @Autowired
-    public FilmDbStorage(JdbcTemplate jdbcTemplate) {
-        this.jdbcTemplate = jdbcTemplate;
-    }
 
     private Film makeFilm(ResultSet resultSet, int rowNum) throws SQLException {
         Film film = new Film();

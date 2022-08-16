@@ -1,5 +1,6 @@
 package ru.yandex.practicum.filmorate.service.impl;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -20,19 +21,12 @@ import java.util.List;
 import java.util.Set;
 
 @Service
+@RequiredArgsConstructor
 public class FilmServiceImpl implements FilmService {
     private final FilmStorage filmStorage;
     private final UserStorage userStorage;
     private final GenreStorage genreStorage;
     private final MpaStorage mpaStorage;
-
-    @Autowired
-    public FilmServiceImpl(@Qualifier("filmDbStorage") FilmStorage filmStorage, @Qualifier("userDbStorage") UserStorage userStorage, @Qualifier("mpaDbStorage") MpaStorage mpaStorage, @Qualifier("genreDbStorage") GenreStorage genreStorage) {
-        this.filmStorage = filmStorage;
-        this.userStorage = userStorage;
-        this.genreStorage = genreStorage;
-        this.mpaStorage = mpaStorage;
-    }
 
     @Override
     public Film get(int filmId) {

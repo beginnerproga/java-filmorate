@@ -1,5 +1,6 @@
 package ru.yandex.practicum.filmorate.storage.db;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -14,12 +15,9 @@ import java.util.List;
 import java.util.Set;
 
 @Repository
+@RequiredArgsConstructor
 public class MpaDbStorage implements MpaStorage {
     private final JdbcTemplate jdbcTemplate;
-    @Autowired
-    public MpaDbStorage(JdbcTemplate jdbcTemplate) {
-        this.jdbcTemplate = jdbcTemplate;
-    }
 
     private Mpa makeMpa(ResultSet resultSet, int rowNum) throws SQLException {
         return new Mpa(

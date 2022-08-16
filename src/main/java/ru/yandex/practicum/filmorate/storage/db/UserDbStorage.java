@@ -1,6 +1,7 @@
 package ru.yandex.practicum.filmorate.storage.db;
 
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
@@ -16,12 +17,9 @@ import java.util.Objects;
 
 @Repository
 @Getter
+@RequiredArgsConstructor
 public class UserDbStorage implements UserStorage {
     private final JdbcTemplate jdbcTemplate;
-    @Autowired
-    public UserDbStorage(JdbcTemplate jdbcTemplate) {
-        this.jdbcTemplate = jdbcTemplate;
-    }
 
     @Override
     public User update(User user) {

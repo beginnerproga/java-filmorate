@@ -9,9 +9,8 @@ import javax.validation.constraints.NotNull;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-@EqualsAndHashCode(of="id")
-public class Genre
-{
+@EqualsAndHashCode(of = "id")
+public class Genre {
     @NotNull
     private int id;
     private String name;
